@@ -1,4 +1,16 @@
-export const metadata={title:'ตลาดรถมือสอง — รวมทุกแหล่ง',description:'รถกระบะ SUV มือสองจาก Facebook, One2Car, Kaidee, Taladrod'};
+export const metadata={title:'ตลาดรถมือสอง',description:'รถกระบะ SUV มือสอง'};
 export default function RootLayout({children}){
-  return(<html lang="th"><body style={{margin:0,fontFamily:'system-ui,sans-serif',background:'#f9fafb'}}>{children}</body></html>);
+  return(
+    <html lang="th">
+      <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.11.0/tabler-icons.min.css"/>
+        <style>{`
+          *{box-sizing:border-box;margin:0;padding:0;}
+          body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f1f5f9;}
+          input,select,button{font-family:inherit;}
+        `}</style>
+      </head>
+      <body>{children}</body>
+    </html>
+  );
 }
