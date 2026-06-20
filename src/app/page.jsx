@@ -267,7 +267,9 @@ export default function Home(){
   const timerRef=useRef(null);
   const cdRef=useRef(null);
 
-  useEffect(()=>{if(!isLoggedIn()){router.push('/login');return;}setReady(true);},[]);
+  const[mounted,setMounted]=useState(false);
+  useEffect(()=>setMounted(true),[]);
+  useEffect(()=>{if(!mounted)return;if(!isLoggedIn()){router.push('/login');return;}setReady(true);},[mounted]);
 
   const fetchHistory=useCallback(async()=>{
     const d=await apiFetch('/api/history');
@@ -302,7 +304,7 @@ export default function Home(){
     );
   },[fetchAll,fetchHistory]);
 
-  if(!ready)return null;
+  if(!ready||!mounted)return null;
 
   const by=stats?.bySource||{};
   const sources=[
