@@ -1,7 +1,7 @@
 export const metadata={title:'ตลาดรถมือสอง',description:'รถกระบะ SUV มือสอง'};
 export default function RootLayout({children}){
   return(
-    <html lang="th">
+    <html lang="th" suppressHydrationWarning>
       <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.11.0/tabler-icons.min.css"/>
         <style>{`
@@ -10,7 +10,7 @@ export default function RootLayout({children}){
           input,select,button{font-family:inherit;}
         `}</style>
       </head>
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
