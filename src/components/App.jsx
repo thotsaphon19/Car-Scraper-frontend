@@ -233,20 +233,15 @@ export default function App() {
   const timerRef = useRef(null);
   const cdRef    = useRef(null);
 
-  const fetchCars = useCallback(async (params={}) => {
+  const fetchCars = useCallback(async () => {
     const p = new URLSearchParams();
-    const s   = params.src     ?? src;
-    const k   = [params.kw??kw, params.brand??brand, params.model??model].filter(Boolean).join(' ');
-    const mn2 = params.mn      ?? mn;
-    const mx2 = params.mx      ?? mx;
-    const l   = params.loc     ?? loc;
-    const d   = params.selDate ?? selDate;
-    if (s)  p.set('source', s);
-    if (k)  p.set('keyword', k);
-    if (mn2)p.set('minPrice', mn2);
-    if (mx2)p.set('maxPrice', mx2);
-    if (l)  p.set('location', l);
-    if (d)  p.set('date', d);
+    if (src)   p.set('source', src);
+    const k = [kw, brand, model].filter(Boolean).join(' ');
+    if (k)     p.set('keyword', k);
+    if (mn)    p.set('minPrice', mn);
+    if (mx)    p.set('maxPrice', mx);
+    if (loc)   p.set('location', loc);
+    if (selDate) p.set('date', selDate);
     const [data, st] = await Promise.all([apiFetch(`/api/cars?${p}`), apiFetch('/api/stats')]);
     if (data) setCars(data.results || []);
     if (st)   setStats(st);
@@ -264,7 +259,7 @@ export default function App() {
     timerRef.current = setInterval(() => fetchCars(), 30000);
     cdRef.current    = setInterval(() => setCd(c => c > 0 ? c-1 : 30), 1000);
     return () => { clearInterval(timerRef.current); clearInterval(cdRef.current); };
-  }, []);
+  }, [fetchCars]);
 
   useEffect(() => { setLoading(true); fetchCars(); }, [src, kw, brand, model, mn, mx, loc, selDate]);
 
