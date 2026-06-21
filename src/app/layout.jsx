@@ -1,4 +1,4 @@
-export const metadata={title:'ตลาดรถมือสอง',description:'รถกระบะ SUV มือสอง'};
+export const metadata={title:'ตลาดรถมือสอง'};
 export default function RootLayout({children}){
   return(
     <html lang="th">
